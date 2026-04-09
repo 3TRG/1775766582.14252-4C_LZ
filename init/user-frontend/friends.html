@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>通讯录管理</title>
+  <link rel="stylesheet" href="css/chat.css" />
+  <style>
+    .contact-tools {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .contact-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      background: rgba(30, 41, 59, 0.3);
+      border-radius: 12px;
+      color: var(--text-2);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      color: white;
+      border-color: transparent;
+    }
+
+    .filter-btn:hover:not(.active) {
+      background: rgba(30, 41, 59, 0.4);
+    }
+
+    .contact-add-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .contact-add-row .search-input {
+      flex: 1;
+    }
+
+    .contact-status-msg {
+      min-height: 20px;
+      font-size: 13px;
+      color: #94a3b8;
+      padding: 0 2px;
+    }
+
+    .contact-detail-card {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(15, 23, 42, 0.56);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+    }
+
+    .contact-detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+    }
+
+    .contact-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .contact-detail-label {
+      color: var(--text-1);
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .contact-detail-value {
+      color: var(--text-2);
+      font-size: 14px;
+      text-align: right;
+      line-height: 1.7;
+    }
+
+    .contact-action-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .contact-action-btn {
+      flex: 1;
+      height: 46px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+
+    .contact-action-btn.secondary {
+      background: rgba(30, 41, 59, 0.8);
+      color: var(--text-1);
+    }
+
+    .contact-action-btn.secondary:hover {
+      background: rgba(51, 65, 85, 0.95);
+    }
+
+    .contact-action-btn.primary {
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      color: white;
+    }
+
+    .contact-action-btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(99, 102, 241, 0.24);
+    }
+
+    .contact-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      background: rgba(0, 212, 255, 0.2);
+      color: #00d4ff;
+      border-radius: 10px;
+      font-size: 12px;
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+
+    .contact-group-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: rgba(157, 78, 221, 0.2);
+      color: #9d4edd;
+      border-radius: 10px;
+      font-size: 12px;
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="main-sidebar">
+      <div class="brand-box">Q</div>
+
+      <div class="main-menu">
+        <div class="main-menu-item" data-page="chat.html">💬</div>
+        <div class="main-menu-item" data-page="friends.html">👥</div>
+        <div class="main-menu-item" data-page="favorites.html">⭐</div>
+        <div class="main-menu-item" data-page="files.html">📁</div>
+        <div class="main-menu-item" data-page="settings.html">⚙️</div>
+      </div>
+    </aside>
+
+    <aside class="session-sidebar">
+      <div class="session-top">
+        <div class="session-title-row">
+          <div class="session-title">通讯录</div>
+      <div class="session-add-btn" id="addContactBtn">+</div>
+        </div>
+
+        <input
+          type="text"
+          class="search-input"
+          id="contactSearchInput"
+          placeholder="搜索联系人"
+        />
+
+        <div class="contact-tools">
+          <div class="contact-filter">
+            <button class="filter-btn active" id="filterAll">全部</button>
+            <button class="filter-btn" id="filterFavorites">收藏夹</button>
+            <button class="filter-btn" id="filterGroups">分组</button>
+            <button class="filter-btn" id="filterTags">标签</button>
+          </div>
+
+          <div class="contact-add-row">
+            <input
+              type="text"
+              class="search-input"
+              id="addContactInput"
+              placeholder="输入姓名、手机号或邮箱添加联系人"
+            />
+            <button class="session-add-btn" id="addContactBtn" type="button">+</button>
+          </div>
+
+          <div class="contact-status-msg" id="contactStatusMsg"></div>
+        </div>
+
+        <div class="session-list" id="contactList"></div>
+      </aside>
+
+      <main class="chat-panel">
+        <header class="chat-topbar">
+          <div>
+            <h2 class="chat-title" id="contactDetailTitle">联系人详情</h2>
+            <p class="chat-subtitle" id="contactDetailSubtitle">请选择左侧联系人查看详情</p>
+          </div>
+        </header>
+
+        <section class="message-area" id="contactDetailArea">
+          <div style="color:#94a3b8;font-size:14px;">请选择左侧联系人查看详情</div>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/page-nav.js"></script>
+    <script src="js/contacts.js"></script>
+    <script src="js/friends.js"></script>
+</body>
+</html>

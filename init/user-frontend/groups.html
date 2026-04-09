@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>群聊管理</title>
+  <link rel="stylesheet" href="css/chat.css" />
+  <style>
+    .group-tools {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .group-create-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .group-create-row .search-input {
+      flex: 1;
+    }
+
+    .group-status-msg {
+      min-height: 20px;
+      font-size: 13px;
+      color: #94a3b8;
+      padding: 0 2px;
+    }
+
+    .group-detail-card {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(15, 23, 42, 0.56);
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+    }
+
+    .group-detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+    }
+
+    .group-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .group-detail-label {
+      color: var(--text-1);
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .group-detail-value {
+      color: var(--text-2);
+      font-size: 14px;
+      text-align: right;
+      line-height: 1.7;
+    }
+
+    .group-members {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .group-member-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+    }
+
+    .group-member-item:last-child {
+      border-bottom: none;
+    }
+
+    .member-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .member-info {
+      flex: 1;
+    }
+
+    .member-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-1);
+    }
+
+    .member-role {
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    .group-action-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .group-action-btn {
+      flex: 1;
+      height: 46px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+
+    .group-action-btn.secondary {
+      background: rgba(30, 41, 59, 0.8);
+      color: var(--text-1);
+    }
+
+    .group-action-btn.secondary:hover {
+      background: rgba(51, 65, 85, 0.95);
+    }
+
+    .group-action-btn.primary {
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      color: white;
+    }
+
+    .group-action-btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(99, 102, 241, 0.24);
+    }
+
+    .group-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .stat-item {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--brand-1);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-2);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="main-sidebar">
+      <div class="brand-box">Q</div>
+
+      <div class="main-menu">
+        <div class="main-menu-item" data-page="chat.html">💬</div>
+        <div class="main-menu-item" data-page="friends.html">👥</div>
+        <div class="main-menu-item" data-page="groups.html">👨‍👩‍👧‍👦</div>
+        <div class="main-menu-item" data-page="favorites.html">⭐</div>
+        <div class="main-menu-item" data-page="files.html">📁</div>
+        <div class="main-menu-item" data-page="settings.html">⚙️</div>
+      </div>
+    </aside>
+
+    <aside class="session-sidebar">
+      <div class="session-top">
+        <div class="session-title-row">
+          <div class="session-title">群聊</div>
+          <div class="session-add-btn" id="createGroupBtn">+</div>
+        </div>
+
+        <input
+          type="text"
+          class="search-input"
+          id="groupSearchInput"
+          placeholder="搜索群聊"
+        />
+
+        <div class="group-tools">
+          <div class="group-create-row">
+            <input
+              type="text"
+              class="search-input"
+              id="createGroupInput"
+              placeholder="输入群聊名称创建群聊"
+            />
+            <button class="session-add-btn" id="createGroupConfirmBtn" type="button">✓</button>
+          </div>
+
+          <div class="group-status-msg" id="groupStatusMsg"></div>
+        </div>
+
+        <div class="session-list" id="groupList"></div>
+      </aside>
+
+      <main class="chat-panel">
+        <header class="chat-topbar">
+          <div>
+            <h2 class="chat-title" id="groupDetailTitle">群聊详情</h2>
+            <p class="chat-subtitle" id="groupDetailSubtitle">请选择左侧群聊查看详情</p>
+          </div>
+        </header>
+
+        <section class="message-area" id="groupDetailArea">
+          <div style="color:#94a3b8;font-size:14px;">请选择左侧群聊查看详情</div>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/page-nav.js"></script>
+    <script src="js/groups.js"></script>
+</body>
+</html>

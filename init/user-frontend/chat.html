@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>聊天主页</title>
+  <link rel="stylesheet" href="css/chat.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="main-sidebar">
+      <div class="brand-box">Q</div>
+
+      <div class="main-menu">
+        <div class="main-menu-item active" data-page="chat.html">💬</div>
+        <div class="main-menu-item" data-page="friends.html">👥</div>
+        <div class="main-menu-item" data-page="favorites.html">⭐</div>
+        <div class="main-menu-item" data-page="files.html">📁</div>
+        <div class="main-menu-item" data-page="settings.html">⚙️</div>
+      </div>
+    </aside>
+
+    <aside class="session-sidebar">
+      <div class="session-top">
+        <div class="session-title-row">
+          <div class="session-title">消息</div>
+          <div class="session-add-btn" id="addSessionBtn">+</div>
+        </div>
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="搜索会话"
+        />
+      </div>
+
+      <div class="session-list" id="sessionList"></div>
+    </aside>
+
+    <main class="chat-panel">
+      <header class="chat-topbar">
+        <div>
+          <h2 class="chat-title" id="chatTitle">文件助手</h2>
+          <p class="chat-subtitle">
+            当前登录用户：<span id="currentUser">未登录</span>
+            <span id="currentNickname"></span>
+          </p>
+        </div>
+
+        <div class="chat-topbar-right">
+          <div class="online-status-box">
+            <span class="online-dot"></span>
+            <span>安全连接已建立</span>
+          </div>
+          <button class="logout-btn-top" id="logoutBtn">退出登录</button>
+        </div>
+      </header>
+
+      <section class="message-area" id="chatMessages"></section>
+
+      <footer class="chat-editor">
+        <div class="editor-tools">
+          <span class="tool-chip">😊</span>
+          <span class="tool-chip">📎</span>
+          <span class="tool-chip">🖼️</span>
+          <span class="tool-chip">📅</span>
+        </div>
+
+        <div class="editor-input-row">
+          <textarea id="chatInput" placeholder="请输入消息内容..."></textarea>
+          <button id="sendBtn">发送</button>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- 新建/重命名会话弹窗 -->
+  <div class="modal-mask hidden" id="sessionModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">新建会话</h3>
+        <button class="modal-close-btn" id="closeModalBtn">×</button>
+      </div>
+
+      <div class="modal-body">
+        <label class="modal-label" for="sessionNameInput">会话名称</label>
+        <input
+          type="text"
+          id="sessionNameInput"
+          class="modal-input"
+          placeholder="请输入联系人或会话名称"
+          maxlength="20"
+        />
+        <p class="modal-tip" id="modalMessage">输入后点击确认</p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="modal-btn secondary" id="cancelModalBtn">取消</button>
+        <button class="modal-btn primary" id="confirmModalBtn">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 删除确认弹窗 -->
+  <div class="modal-mask hidden" id="deleteModal">
+    <div class="modal-card modal-small">
+      <div class="modal-header">
+        <h3>删除会话</h3>
+        <button class="modal-close-btn" id="closeDeleteModalBtn">×</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="delete-text" id="deleteModalText">确认删除这个会话吗？</p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="modal-btn secondary" id="cancelDeleteBtn">取消</button>
+        <button class="modal-btn danger" id="confirmDeleteBtn">确认删除</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script src="js/config.js"></script>
+  <!-- mock-data.js 已移除：所有数据现通过 api.js 从后端实时获取 -->
+  <script src="js/api.js"></script>
+  <script src="js/page-nav.js"></script>
+  <script src="js/socket.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

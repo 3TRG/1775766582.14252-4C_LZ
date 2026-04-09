@@ -1,0 +1,37 @@
+# 测试环境配置
+# 继承基础配置并覆盖测试环境特定值
+
+database:
+  url: "sqlite:///./database_test.db"
+  echo: false
+
+security:
+  token_expire_hours: 1
+  token_secret: "test-secret-key"
+  master_key: "test-master-key"
+  algorithm: "HS256"
+  access_token_expire_minutes: 5
+
+qke:
+  default_backend: "local_simulator"
+  default_key_length: 128  # 测试环境使用较短的密钥以加快速度
+  default_decoy_count: 2
+  session_timeout_minutes: 5
+  max_participants: 5
+
+server:
+  host: "0.0.0.0"
+  port: 8001  # 测试环境使用不同端口避免冲突
+  debug: true
+  reload: false
+  workers: 1
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_path: "./logs/app_test.log"
+  max_size_mb: 10
+  backup_count: 3
+
+environment: "test"
+version: "1.0.0"

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>注册</title>
+  <link rel="stylesheet" href="css/register.css" /> <!-- 引用与登录页面相同的样式 -->
+</head>
+<body>
+  <div class="login-shell">
+    <div class="login-brand-panel">
+      <div class="brand-badge">QUANTUM CHAT</div>
+      <h1 class="brand-title">新一代安全通信工作台</h1>
+      <p class="brand-desc">
+        以更专业的视觉风格，构建注册、登录、会话、消息与协作的一体化前端界面。
+      </p>
+    </div>
+
+    <div class="login-panel">
+      <div class="login-card">
+        <div class="logo">Q</div>
+        <h2 class="login-heading">注册新账号</h2>
+        <p class="subtitle">请输入您的手机号、密码等信息进行注册</p>
+
+        <form id="registerForm">
+          <!-- 用户名输入框 -->
+          <div class="form-group">
+            <label for="username">用户名</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="请输入用户名"
+              required
+            />
+          </div>
+
+          <!-- 手机号输入框 -->
+          <div class="form-group">
+            <label for="phone">手机号</label>
+            <input
+              type="text"
+              id="phone"
+              placeholder="请输入 11 位手机号"
+              maxlength="11"
+              required
+            />
+          </div>
+
+          <!-- 密码输入框 -->
+          <div class="form-group">
+            <label for="password">密码</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="请输入密码"
+              required
+            />
+          </div>
+
+          <!-- 确认密码输入框 -->
+          <div class="form-group">
+            <label for="confirmPassword">确认密码</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="请确认密码"
+              required
+            />
+          </div>
+
+          <button type="submit" class="login-btn">注册账号</button>
+        </form>
+
+        <p id="message" class="message"></p>
+
+        <!-- 登录链接，确保与页面风格一致 -->
+        <div class="register-link">
+          <p>已有账号？<a href="login.html">去登录</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/register.js"></script> <!-- 新注册页面的逻辑 -->
+</body>
+</html>

@@ -1,0 +1,187 @@
+/* Quantum Theme - 与 admin-frontend 共享 */
+
+:root {
+  /* Primary Colors */
+  --quantum-primary: #6366f1;
+  --quantum-primary-hover: #4f46e5;
+  --quantum-primary-light: rgba(99, 102, 241, 0.1);
+
+  /* Secondary Colors */
+  --quantum-secondary: #8b5cf6;
+  --quantum-secondary-hover: #7c3aed;
+
+  /* Accent Colors */
+  --quantum-accent: #06b6d4;
+  --quantum-accent-hover: #0891b2;
+
+  /* Background Colors */
+  --quantum-bg-dark: #0f172a;
+  --quantum-bg-darker: #020617;
+  --quantum-bg-card: rgba(30, 41, 59, 0.5);
+  --quantum-bg-hover: rgba(51, 65, 85, 0.5);
+
+  /* Text Colors */
+  --quantum-text-primary: #f1f5f9;
+  --quantum-text-secondary: #94a3b8;
+  --quantum-text-muted: #64748b;
+
+  /* Border Colors */
+  --quantum-border: rgba(71, 85, 105, 0.5);
+  --quantum-border-focus: #6366f1;
+
+  /* Status Colors */
+  --quantum-success: #22c55e;
+  --quantum-warning: #eab308;
+  --quantum-error: #ef4444;
+  --quantum-info: #3b82f6;
+
+  /* Shadows */
+  --quantum-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --quantum-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --quantum-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+  --quantum-shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+
+  /* Transitions */
+  --quantum-transition-fast: 150ms ease;
+  --quantum-transition-normal: 200ms ease;
+  --quantum-transition-slow: 300ms ease;
+
+  /* Border Radius */
+  --quantum-radius-sm: 0.375rem;
+  --quantum-radius-md: 0.5rem;
+  --quantum-radius-lg: 0.75rem;
+  --quantum-radius-xl: 1rem;
+  --quantum-radius-full: 9999px;
+}
+
+/* Quantum Card */
+.quantum-card {
+  background: var(--quantum-bg-card);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--quantum-border);
+  border-radius: var(--quantum-radius-lg);
+  transition: all var(--quantum-transition-normal);
+}
+
+.quantum-card:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+/* Quantum Input */
+.quantum-input {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid var(--quantum-border);
+  border-radius: var(--quantum-radius-md);
+  color: var(--quantum-text-primary);
+  font-size: 0.875rem;
+  transition: all var(--quantum-transition-normal);
+}
+
+.quantum-input::placeholder {
+  color: var(--quantum-text-muted);
+}
+
+.quantum-input:focus {
+  outline: none;
+  border-color: var(--quantum-border-focus);
+  box-shadow: 0 0 0 3px var(--quantum-primary-light);
+}
+
+/* Quantum Button */
+.quantum-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background: var(--quantum-primary);
+  color: white;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-radius: var(--quantum-radius-md);
+  transition: all var(--quantum-transition-normal);
+  cursor: pointer;
+  border: none;
+}
+
+.quantum-btn:hover {
+  background: var(--quantum-primary-hover);
+  box-shadow: var(--quantum-shadow-glow);
+}
+
+.quantum-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantum-btn-secondary {
+  background: rgba(51, 65, 85, 0.8);
+}
+
+.quantum-btn-secondary:hover {
+  background: rgba(71, 85, 105, 0.8);
+  box-shadow: none;
+}
+
+.quantum-btn-danger {
+  background: var(--quantum-error);
+}
+
+.quantum-btn-danger:hover {
+  background: #dc2626;
+}
+
+/* Quantum Badge */
+.quantum-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: var(--quantum-radius-full);
+}
+
+.quantum-badge-primary {
+  background: var(--quantum-primary-light);
+  color: var(--quantum-primary);
+}
+
+.quantum-badge-success {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--quantum-success);
+}
+
+.quantum-badge-warning {
+  background: rgba(234, 179, 8, 0.1);
+  color: var(--quantum-warning);
+}
+
+.quantum-badge-error {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--quantum-error);
+}
+
+/* Status Indicator */
+.status-indicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--quantum-radius-full);
+  border: 2px solid var(--quantum-bg-dark);
+}
+
+.status-online {
+  background: var(--quantum-success);
+}
+
+.status-offline {
+  background: var(--quantum-text-muted);
+}
+
+.status-busy {
+  background: var(--quantum-error);
+}
+
+.status-away {
+  background: var(--quantum-warning);
+}

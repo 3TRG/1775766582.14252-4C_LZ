@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import quantum theme and animations */
+@import './styles/quantum-theme.css';
+@import './styles/animations.css';
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #f1f5f9;
+  background-color: #0f172a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Quantum Theme Styles */
+@layer components {
+  .quantum-card {
+    @apply bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg;
+  }
+
+  .quantum-input {
+    @apply w-full px-4 py-2 bg-slate-800/50 border border-slate-600 rounded-lg
+           text-slate-100 placeholder-slate-400
+           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent
+           transition-all duration-200;
+  }
+
+  .quantum-btn {
+    @apply px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium
+           rounded-lg transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-900;
+  }
+
+  .quantum-btn-secondary {
+    @apply px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-100 font-medium
+           rounded-lg transition-all duration-200;
+  }
+
+  .quantum-btn-danger {
+    @apply px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium
+           rounded-lg transition-all duration-200;
+  }
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}

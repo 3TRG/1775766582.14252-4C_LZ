@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+.env
+*.env
+!.env.example
+database.db
+instance/
+tests/
+test_*.py
+query_*.py

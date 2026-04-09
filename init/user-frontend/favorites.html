@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>收藏管理</title>
+  <link rel="stylesheet" href="css/chat.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="main-sidebar">
+      <div class="brand-box">Q</div>
+
+      <div class="main-menu">
+        <div class="main-menu-item" data-page="chat.html">💬</div>
+        <div class="main-menu-item" data-page="friends.html">👥</div>
+        <div class="main-menu-item" data-page="favorites.html">⭐</div>
+        <div class="main-menu-item" data-page="files.html">📁</div>
+        <div class="main-menu-item" data-page="settings.html">⚙️</div>
+      </div>
+    </aside>
+
+    <aside class="session-sidebar">
+      <div class="session-top">
+        <div class="session-title-row">
+          <div class="session-title">收藏</div>
+        </div>
+        <input
+          type="text"
+          class="search-input"
+          id="favoriteSearchInput"
+          placeholder="搜索收藏内容"
+        />
+      </div>
+
+      <div class="session-list" id="favoriteList"></div>
+    </aside>
+
+    <main class="chat-panel">
+      <header class="chat-topbar">
+        <div>
+          <h2 class="chat-title">收藏夹</h2>
+          <p class="chat-subtitle">查看你标记的重要消息、会话或内容</p>
+        </div>
+      </header>
+
+      <section class="message-area" id="favoriteDetailArea">
+        <div style="color:#94a3b8;font-size:14px;">
+          请选择左侧收藏项查看详情
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/page-nav.js"></script>
+  <script src="js/favorites.js"></script>
+</body>
+</html>

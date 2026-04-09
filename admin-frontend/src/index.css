@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-quantum-darker text-gray-100 font-inter min-h-screen overflow-x-hidden;
+  }
+}
+
+@layer components {
+  .quantum-bg {
+    @apply fixed top-0 left-0 w-full h-full -z-10 overflow-hidden bg-gradient-to-br from-quantum-darker via-[#101838] to-quantum-darker;
+  }
+  
+  .particle-field {
+    @apply absolute w-full h-full opacity-35 animate-particleFloat;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #00d4ff, transparent),
+        radial-gradient(2px 2px at 40px 70px, #9d4edd, transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(2px 2px at 160px 120px, #00d4ff, transparent),
+        radial-gradient(3px 3px at 200px 80px, #ff006e, transparent),
+        radial-gradient(1px 1px at 10px 150px, #06ffa5, transparent);
+    background-repeat: repeat;
+    background-size: 300px 300px;
+  }
+  
+  .particle-field-2 {
+    @apply absolute w-full h-full opacity-25 animate-particleFloatReverse;
+    background-image: 
+        radial-gradient(1px 1px at 50px 60px, #ffb703, transparent),
+        radial-gradient(2px 2px at 120px 90px, #00d4ff, transparent);
+    background-repeat: repeat;
+    background-size: 400px 400px;
+  }
+  
+  .navbar {
+  @apply fixed top-0 left-0 w-64 h-screen bg-[rgba(10,14,39,0.85)] backdrop-blur-xl border-r border-quantum-border z-50;
+}
+  
+  .nav-link {
+  @apply text-gray-400 hover:text-quantum-blue px-5 py-3 rounded-lg transition-all duration-300 relative overflow-hidden block;
+}
+
+.nav-link.active {
+  @apply text-white bg-gradient-to-r from-[rgba(0,212,255,0.2)] to-[rgba(157,78,221,0.2)] border border-quantum-blue;
+}
+  
+  .panel {
+    @apply bg-quantum-card border border-quantum-border rounded-2xl p-6 backdrop-blur-md shadow-xl;
+  }
+  
+  .quantum-btn {
+    @apply px-8 py-3 rounded-lg font-semibold flex items-center gap-2 transition-all duration-300 relative overflow-hidden z-10;
+  }
+  
+  .quantum-btn.primary {
+    @apply bg-gradient-to-r from-quantum-blue to-quantum-purple text-white shadow-lg hover:shadow-xl hover:-translate-y-1;
+  }
+  
+  .quantum-btn.secondary {
+    @apply bg-gradient-to-r from-[rgba(255,255,255,0.12)] to-[rgba(255,255,255,0.05)] text-gray-300 border border-[rgba(255,255,255,0.25)] hover:border-quantum-blue hover:text-quantum-blue;
+  }
+  
+  .metric-card {
+    @apply bg-gradient-to-r from-[rgba(0,212,255,0.1)] to-[rgba(157,78,221,0.1)] border border-quantum-border rounded-xl p-4 flex items-center gap-4;
+  }
+  
+  .chart-container {
+    @apply bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.1)] rounded-xl p-4 min-h-[350px];
+  }
+}
+
+@layer utilities {
+  .animate-particleFloat {
+    animation: particleFloat 25s linear infinite;
+  }
+  
+  .animate-particleFloatReverse {
+    animation: particleFloatReverse 30s linear infinite;
+  }
+  
+  .animate-rotate {
+    animation: rotate 10s linear infinite;
+  }
+  
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-300px) translateX(50px); }
+}
+
+@keyframes particleFloatReverse {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(300px) translateX(-50px); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

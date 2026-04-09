@@ -1,0 +1,42 @@
+# 默认配置文件
+# 环境变量将覆盖这些值
+
+database:
+  url: "sqlite:///./database.db"
+  echo: false
+  pool_size: 5
+  max_overflow: 10
+  pool_timeout: 30
+  pool_recycle: 1800
+
+security:
+  token_expire_hours: 24
+  token_secret: ""  # 应通过环境变量设置
+  master_key: ""    # 应通过环境变量设置
+  master_key_b64: "" # 应通过环境变量设置
+  algorithm: "HS256"
+  access_token_expire_minutes: 30
+
+qke:
+  default_backend: "local_simulator"
+  default_key_length: 256
+  default_decoy_count: 4
+  session_timeout_minutes: 30
+  max_participants: 10
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  debug: false
+  reload: false
+  workers: 1
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_path: "./logs/app.log"
+  max_size_mb: 10
+  backup_count: 5
+
+environment: "development"
+version: "1.0.0"
